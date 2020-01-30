@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # <bitbar.title>Fuzzy Clock</bitbar.title>
-# <bitbar.author>Dylan Evans</bitbar.author>
+# <bitbar.author>Dylan Evans + loikein</bitbar.author>
 # <bitbar.author.github>whonut</bitbar.author.github>
 # <bitbar.desc>Display the current system time in a 'fuzzy' manner, rounding to the nearest 5 minutes and using words.</bitbar.desc>
 # <bitbar.version>1.0</bitbar.version>
@@ -36,25 +36,26 @@ def fuzzy_time(struct_time):
         rounded_min = 0
         hour = next_hour(hour)
 
-    num_word = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six",
-                7: "seven", 8: "eight", 9: "nine", 10: "ten", 11: "eleven",
-                12: "twelve", 20: "twenty", 25: "twenty-five"}
+    num_word = {1: "一", 2: "两", 3: "三", 4: "四", 5: "五", 6: "六",
+                7: "七", 8: "八", 9: "九", 10: "十", 11: "十一",
+                12: "十二", 20: "二十", 25: "二十五"}
 
     # Work out what to display and display it.
     if rounded_min == 0:
-        return "{hr} o'clock".format(hr=num_word[hour])
+        return "{hr}点".format(hr=num_word[hour])
     elif rounded_min == 15:
-        return "quarter past {hr}".format(hr=num_word[hour])
+        return "{hr}点一刻".format(hr=num_word[hour])
     elif rounded_min < 30:
-        return "{min} past {hr}".format(min=num_word[rounded_min],
-                                        hr=num_word[hour])
+        return "{hr}点 {min} 分".format(min=num_word[rounded_min],
+                                      hr=num_word[hour])
     elif rounded_min == 30:
-        return "half past {hr}".format(hr=num_word[hour])
+        return "{hr}点半".format(hr=num_word[hour])
     elif rounded_min == 45:
-        return "quarter to {hr}".format(hr=num_word[next_hour(hour)])
+        return "{hr}点三刻".format(hr=num_word[hour])
     else:
-        return "{min} to {hr}".format(min=num_word[60-rounded_min],
-                                      hr=num_word[next_hour(hour)])
+        return "差 {min} 分{hr}点".format(min=num_word[60-rounded_min],
+                                       hr=num_word[next_hour(hour)])
+
 
 if __name__ == '__main__':
     print(fuzzy_time(localtime()))
