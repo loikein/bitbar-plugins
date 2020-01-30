@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# encoding=utf8
 
 # <bitbar.title>Fuzzy Clock</bitbar.title>
 # <bitbar.author>Dylan Evans + loikein</bitbar.author>
@@ -11,6 +12,10 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 from time import localtime
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 
 def round_to_nearest_five(n):
