@@ -51,15 +51,15 @@ def fuzzy_time(struct_time):
     elif rounded_min == 15:
         return "{hr}点一刻".format(hr=num_word[hour])
     elif rounded_min < 30:
-        return "{hr}点 {min} 分".format(min=num_word[rounded_min],
-                                      hr=num_word[hour])
+        return "{hr}点{min}分".format(min=num_word[rounded_min],
+                                    hr=num_word[hour])
     elif rounded_min == 30:
         return "{hr}点半".format(hr=num_word[hour])
     elif rounded_min == 45:
-        return "{hr}点三刻".format(hr=num_word[hour])
+        return "差一刻{hr}点".format(hr=num_word[next_hour(hour)])
     else:
-        return "差 {min} 分{hr}点".format(min=num_word[60-rounded_min],
-                                       hr=num_word[next_hour(hour)])
+        return "差{min}分{hr}点".format(min=num_word[60-rounded_min],
+                                     hr=num_word[next_hour(hour)])
 
 
 if __name__ == '__main__':
